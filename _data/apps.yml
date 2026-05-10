@@ -1,6 +1,9 @@
 - name: Bril
   url: https://gitlab.gnome.org/monster/bril
 
+- name: Boa
+  url: https://gitlab.gnome.org/monster/boa
+
 - name: Calligraphy
   url: https://codeberg.org/GeopJr/Calligraphy
 
@@ -48,9 +51,6 @@
 
 - name: Showtime
   url: https://gitlab.gnome.org/GNOME/showtime
-
-- name: Sly
-  url: https://git.kramo.page/sly
 
 - name: First Setup
   url: https://github.com/vanilla-OS/first-setup
