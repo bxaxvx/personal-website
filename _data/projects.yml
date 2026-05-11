@@ -5,7 +5,7 @@
   bg: "linear-gradient(#60539c, #584990)"
 
 - name: Sly
-  url: /sly
+  url: https://sly.pictures
   desc: Delightful Image Editor
   img: 'width="200" src="/images/sly.webp" style="margin-top: 6px; margin-bottom: -24px"'
   bg: "linear-gradient(#ec6649, #d24e32)"

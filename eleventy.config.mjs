@@ -7,8 +7,8 @@ export default function (eleventyConfig) {
   );
 
   eleventyConfig.ignores.add("README.md");
-  ["fonts", "images", "videos", "sly", "style.css", ".well-known"].forEach(
-    (path) => eleventyConfig.addPassthroughCopy(path),
+  ["fonts", "images", "videos", "style.css", ".well-known"].forEach((path) =>
+    eleventyConfig.addPassthroughCopy(path),
   );
 
   eleventyConfig.addLayoutAlias("plain", "plain.liquid");
