@@ -14,7 +14,7 @@ I got a US keyboard so now I have 2 different ways of typing accented characters
 
 Most systems (the OS/browser in this case) normalize all text either one way or the other. In this case, to a single code point. Unicode does have deprecation, so you would think that when they introduced combining characters, they would have deprecated the precomposed versions of characters that can be written using them, right? Nope!
 
-It’s arbitrary which way each systems normalizes text. Some do it *composed* (`á`) and some *decomposed* (`a` + `◌́`). Both are part of the standard. And of course, you need to treat them as equivalent when not normalized so you might as well do it when you can anyway.
+It’s arbitrary which way each system normalizes text. Some do it *composed* (`á`) and some *decomposed* (`a` + `◌́`). Both are part of the standard. And of course, you need to treat them as equivalent when not normalized so you might as well do it when you can anyway.
 
 <figure>
   <blockquote>
