@@ -24,7 +24,7 @@ Support for controller navigation has been something I’ve attempted in the pas
 ## Collections
 Easily the most requested feature, a lot of people asked for a way to manually organize their games. I initially rejected the idea as I wanted Cartridges to remain a single-click game launcher but softened up to it over time as more and more people requested it since it’s an optional dimension that you can just ignore if you don’t use it. As such, I’m happy to say that Jamie has been working on categorization with an initial implementation ready for review as of writing this. You can support her on [Liberapay](https://liberapay.com/monster) or [GitHub Sponsors](https://github.com/sponsors/jamiethecat).
 
-![](/images/screenshots/cartridges-collections.webp)
+![](/images/cartridges-collections.webp)
   
 ## Instant Imports
 I mentioned that Cartridges’ main selling point is being a single-click launcher. This is as good it gets, right? Wrong: how about zero clicks?

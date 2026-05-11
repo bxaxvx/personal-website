@@ -185,40 +185,6 @@ a {
     }
   }
 
-  &.button {
-    border: 1px solid rgb(from var(--fg) r g b / 5%);
-    background-color: rgb(from var(--fg) r g b / 9%);
-    padding: 0.7em 2em;
-    border-radius: 9999px;
-    display: inline-block;
-    font-family: var(--bold);
-    color: var(--fg);
-    margin: 0.6em 0.8%;
-
-    &:hover {
-      color: var(--fg);
-
-      @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-        transform: scale(1.05);
-      }
-    }
-
-    &:active {
-      @media (pointer: fine) and (prefers-reduced-motion: no-preference) {
-        transform: scale(0.9);
-      }
-    }
-
-    &.suggested {
-      background-color: var(--fg);
-      color: var(--bg);
-
-      &:hover {
-        color: var(--bg);
-      }
-    }
-  }
-
   .arrow {
     margin-left: 0.3em;
     transition: margin-left 0.4s;
@@ -303,41 +269,6 @@ nav {
       &:last-child:not(.selected) {
         margin-right: 0.5em;
       }
-    }
-  }
-}
-
-footer {
-  flex-shrink: 0;
-  background-color: rgb(from var(--fg) r g b / 5%);
-  border-top: 1px solid rgb(from var(--fg) r g b / 5%);
-
-  > div {
-    display: flex;
-    justify-content: center;
-    column-gap: 2em;
-
-    > ul {
-      list-style-type: none;
-      padding: 0;
-
-      > li {
-        display: inline-block;
-        padding: 1em;
-      }
-    }
-  }
-
-  > p {
-    margin: 0 1.25em;
-    padding: 1em 0 1.5em;
-  }
-
-  a {
-    color: var(--fg);
-
-    &:hover {
-      color: var(--accent-bright);
     }
   }
 }
