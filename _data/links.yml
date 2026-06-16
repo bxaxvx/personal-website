@@ -6,10 +6,6 @@
   url: https://github.com/kra-mo
   color: b14cff
 
-- name: Liberapay
-  url: http://liberapay.com/kramo
-  color: d89b00
-
 - name: GNOME GitLab
   url: https://gitlab.gnome.org/kramo
   color: 4a86cf
