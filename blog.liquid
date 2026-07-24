@@ -1,0 +1,38 @@
+---
+title: Laura Kramolis’ Blog
+description: A blog about systems
+layout: default
+eleventyImport:
+  collections: ["post"]
+---
+<style>
+  #posts {
+    list-style: none;
+    text-align: left;
+    max-width: 45em;
+    margin: auto;
+    padding: 0 1em;
+
+    > li {
+      margin-bottom: 2em;
+
+      @media (prefers-reduced-motion: no-preference) {
+        animation: bounce-appear;
+      }
+    }
+  }
+</style>
+
+<ul id="posts">
+  {% for post in collections.post reversed %}
+    <li class="selectable" style="animation-duration: {{ forloop.index0 | times: 0.1 | plus: 0.7 }}s;">
+      <hgroup>
+        <h2>
+          <a href="{{ post.url }}">{{ post.data.title }}</a>
+        </h2>
+        <p>{{ post.data.description }}</p>
+      </hgroup>
+      <p>{{ post.date | date: '%B %-d, %Y' }}</p>
+    </li>
+  {% endfor %}
+</ul>
