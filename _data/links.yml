@@ -1,23 +1,27 @@
-- name: Codeberg
-  url: https://codeberg.org/kramo
-  color: 2185d0
+- name: YouTube
+  url: https://www.youtube.com/@bychkovskyi
+  color: ff0000
 
-- name: GitHub
-  url: https://github.com/kra-mo
-  color: b14cff
+- name: Steam
+  url: https://store.steampowered.com/publisher/bychkovskyi
+  color: 1b2838
 
-- name: GNOME GitLab
-  url: https://gitlab.gnome.org/kramo
-  color: 4a86cf
+- name: itch.io
+  url: https://andriy-bychkovskyi.itch.io/
+  color: fa5c5c
 
-- name: Mastodon
-  url: https://chaos.social/@kramo
-  color: 6364ff
+- name: x.com
+  url: https://x.com/bychk0vskyi
+  color: 71767b
+
+#- name: Instagram
+#  url: https://www.instagram.com/purexhate/
+#  color: e4405f
 
 - name: Email
-  url: "&#109;a&#105;&#108;&#116;&#111;&#58;&#99;&#111;&#110;&#116;&#97;&#99;&#116;&#64;&#107;&#114;&#97;&#109;o&period;&#112;&#97;&#103;&#101;"
+  url: "mailto:andriy@bychkovskyi.com"
   color: 2978f5
 
-- name: Matrix
-  url: https://matrix.to/#/@kramo:matrix.org
-  color: 2ba278
+#- name: Linkedin
+#  url: https://www.linkedin.com/in/andriy-bychkovskyi-b15539166/
+#  color: 0a66c2
