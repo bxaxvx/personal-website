@@ -6,6 +6,9 @@ export default function (eleventyConfig) {
     yaml.load(contents),
   );
 
+  // Locale-independent RFC-822 date for RSS feeds (always English).
+  eleventyConfig.addFilter("rfc822", (date) => new Date(date).toUTCString());
+
   eleventyConfig.ignores.add("README.md");
   ["fonts", "images", "videos", "style.css", ".well-known"].forEach((path) =>
     eleventyConfig.addPassthroughCopy(path),
@@ -36,7 +39,7 @@ export default function (eleventyConfig) {
       language: "en",
       title: "kramo's blog",
       subtitle: "Reflections on how things work",
-      base: "https://kramo.page/",
+      base: "https://bychkovskyi.com/",
       author: { name: "Laura Kramolis" },
     },
   });

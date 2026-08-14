@@ -1,0 +1,29 @@
+# Materials that mention me, interviews, and articles.
+# Each entry:
+#   date:  publication date (YYYY-MM-DD)
+#   lang:  language of the material — "en" (English) or "uk" (Ukrainian)
+#   title: title shown as a link
+#   url:   link to the material
+#
+# Order does not matter — the page sorts by date, newest first.
+# The entries below are examples; replace them with real ones.
+
+- date: 2023-01-16
+  lang: uk
+  title: "Як створити успішну інді-стратегію й чому видавець — це не завжди добре. Історія розробника гри Farlanders"
+  url: https://gamedev.dou.ua/articles/farlanders-indie-game-story/
+
+- date: 2026-06-25
+  lang: uk
+  title: "Сам собі продюсер, художник і кодер: поради від українських інді-девелоперів, як самому створити гру та скільки це коштує"
+  url: https://dev.ua/news/indie-gamedev-guide
+
+- date: 2025-07-25
+  lang: uk
+  title: "«Потрібно вміти все й одразу». Як організовують свою працю українські соло-розробники"
+  url: https://gamedev.dou.ua/articles/how-ukrainian-solo-developers-working/
+
+- date: 2025-09-08
+  lang: uk
+  title: "Про реліз Super Loco World, видавців та ніші | Бесіда з Андрієм Бичковським"
+  url: https://www.youtube.com/watch?v=grSp1GMPaU4

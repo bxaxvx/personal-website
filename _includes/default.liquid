@@ -5,7 +5,7 @@
     <meta name="description" content="{{ description }}">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <link rel="canonical" href="https://kramo.page{{ page.url }}">
+    <link rel="canonical" href="https://bychkovskyi.com{{ page.url }}">
 
     <title>{{ title }}</title>
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
@@ -13,12 +13,14 @@
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
     <link rel="stylesheet" type="text/css" href="/style.css?v=4.5">
 
+    {% if page.url == "/press" %}<link rel="alternate" type="application/rss+xml" title="Andrii Bychkovskyi — Press" href="/press.xml">{% endif %}
+
     <!-- Open Graph metadata -->
     <meta property="og:title" content="{{ title }}">
     <meta property="og:description" content="{{ description }}">
     <meta property="og:type" content="website">
-    <meta property="og:url" content="https://kramo.page{{ page.url }}">
-    <meta property="og:image" content="https://kramo.page/images/apple-touch-icon.png">
+    <meta property="og:url" content="https://bychkovskyi.com{{ page.url }}">
+    <meta property="og:image" content="https://bychkovskyi.com/images/apple-touch-icon.png">
     <meta property="og:image:type" content="image/png">
     <meta property="og:image:alt" content="A geometric fox logo">
 
@@ -28,17 +30,16 @@
   </head>
   <body id="plain-body">
     {% assign home = page.url == "/" %}
-    {% assign icons = page.url == "/app-icon-design" %}
     {% assign post = tags contains "post" %}
     {% assign blog = post or page.url == "/blog" %}
-    {% assign any = home or icons or blog %}
+    {% assign press = page.url == "/press" %}
+    {% assign games = home == false and blog == false and press == false %}
     <header>
       <nav id="nav">
         <ul>
-          <li class="{% if home %}selected{% endif %}"><a class="dim" href="/">{% include 'kramo.svg' %} kramo</a></li>
-          <li class="{% if not any %}selected{% endif %}"><a class="dim" href="/projects">Projects</a></li>
-          <li class="{% if icons %}selected{% endif %}"><a class="dim" href="/app-icon-design">Icons</a></li>
-          <li class="{% if blog %}selected{% endif %}"><a class="dim" href="/blog">Blog</a></li>
+          <li class="{% if home %}selected{% endif %}"><a class="dim" href="/">{% include 'kramo.svg' %} Main</a></li>
+          <li class="{% if games %}selected{% endif %}"><a class="dim" href="/projects">Games</a></li>
+          <li class="{% if press %}selected{% endif %}"><a class="dim" href="/press">Press</a></li>
         </ul>
       </nav>
     </header>

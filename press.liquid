@@ -1,0 +1,59 @@
+---
+title: Andrii Bychkovskyi - Press
+description: "Articles, interviews, and other materials featuring Andrii Bychkovskyi"
+layout: default
+---
+<style>
+  #press {
+    list-style: none;
+    text-align: left;
+    max-width: 45em;
+    margin: auto;
+    padding: 0 1em;
+
+    > li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75em;
+      margin-bottom: 1.5em;
+
+      @media (prefers-reduced-motion: no-preference) {
+        animation: bounce-appear;
+      }
+    }
+
+    .date {
+      flex: none;
+      color: rgb(from var(--fg) r g b / 55%);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    .flag {
+      flex: none;
+    }
+  }
+
+  #subscribe {
+    margin: 0 0 2em;
+  }
+</style>
+
+<p id="subscribe">
+  <a class="dim" title="Subscribe via RSS" href="/press.xml">{% include 'rss.svg' %}</a>
+</p>
+
+<ul id="press">
+  {% assign sorted = articles | sort: "date" | reverse %}
+  {% for article in sorted %}
+    <li class="selectable" style="animation-duration: {{ forloop.index0 | times: 0.1 | plus: 0.7 }}s;">
+      <span class="date">{{ article.date | date: "%b %-d, %Y" }}</span>
+      {% if article.lang == "uk" %}
+        <span class="flag" role="img" aria-label="Ukrainian" title="Ukrainian">🇺🇦</span>
+      {% else %}
+        <span class="flag" role="img" aria-label="English" title="English">🇬🇧</span>
+      {% endif %}
+      <a href="{{ article.url }}">{{ article.title }}</a>
+    </li>
+  {% endfor %}
+</ul>

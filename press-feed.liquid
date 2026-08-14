@@ -1,0 +1,25 @@
+---
+permalink: /press.xml
+eleventyExcludeFromCollections: true
+---
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Andrii Bychkovskyi — Press</title>
+    <link>https://bychkovskyi.com/press</link>
+    <atom:link href="https://bychkovskyi.com/press.xml" rel="self" type="application/rss+xml" />
+    <description>Articles, interviews, and other materials featuring Andrii Bychkovskyi</description>
+    {% assign sorted = articles | sort: "date" | reverse -%}
+    {% assign newest = sorted | first -%}
+    {% if newest %}<lastBuildDate>{{ newest.date | rfc822 }}</lastBuildDate>{% endif %}
+    {% for article in sorted %}
+    <item>
+      <title>{{ article.title | escape }}</title>
+      <link>{{ article.url }}</link>
+      <guid isPermaLink="true">{{ article.url }}</guid>
+      <dc:language xmlns:dc="http://purl.org/dc/elements/1.1/">{{ article.lang }}</dc:language>
+      <pubDate>{{ article.date | rfc822 }}</pubDate>
+    </item>
+    {% endfor %}
+  </channel>
+</rss>
