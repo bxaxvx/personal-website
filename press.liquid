@@ -38,6 +38,18 @@ layout: default
       min-width: 0;
       white-space: normal;
     }
+
+    .youtube {
+      flex: none;
+      align-self: center;
+      display: inline-flex;
+      color: rgb(from var(--fg) r g b / 55%);
+    }
+
+    .youtube svg {
+      width: 1.1em;
+      height: 1.1em;
+    }
   }
 
   #subscribe {
@@ -60,6 +72,9 @@ layout: default
         <span class="flag" role="img" aria-label="English" title="English">🇬🇧</span>
       {% endif %}
       <a href="{{ article.url }}">{{ article.title }}</a>
+      {% if article.url contains "youtube.com" %}
+        <span class="youtube" role="img" aria-label="YouTube" title="YouTube">{% include 'icons/YouTube.svg' %}</span>
+      {% endif %}
     </li>
   {% endfor %}
 </ul>
