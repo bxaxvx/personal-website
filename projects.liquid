@@ -1,54 +1,46 @@
 ---
-title: kramo’s Projects
-description: "Laura Kramolis’ apps, extensions, and graphics"
+title: Andrii Bychkovskyi - Games
+description: "Games developed by Andrii Bychkovskyi"
 layout: default
 ---
 <style>
-  main {
-    align-self: center;
+  #games {
     display: flex;
     flex-direction: column;
-    row-gap: 1.5em;
+    align-items: center;
+    gap: 1.5em;
+    padding: 0 1em;
   }
 
-  .card {
-    padding: 2em 1em 2.5em;
-    color: white;
-    box-shadow: 0 0 0 2px rgb(0 0 0 / 5%) inset;
+  .steam-widget {
+    width: 646px;
+    max-width: 100%;
+    aspect-ratio: 646 / 190;
+    border: 0;
+    border-radius: 4px;
 
-    > div {
-      opacity: 0.75;
+    /* The widget's document body is transparent, so the iframe's own canvas
+       shows through around the card. Inheriting `color-scheme: light dark`
+       from :root makes that canvas render as an opaque white backdrop, which
+       looks fine on the light theme but leaves a white halo in dark mode.
+       Resetting to `normal` lets the canvas track the OS scheme like everything
+       else, so it stays dark on the dark theme. */
+    color-scheme: normal;
+
+    @media (prefers-reduced-motion: no-preference) {
+      animation: bounce-appear forwards;
     }
   }
 </style>
 
-{% for project in projects %}
-  {% if project.url %}
-    <a href="{{ project.url }}">
-  {% endif %}
-
-  <div
-    class="card"
-    style="
-      animation-duration: {{ forloop.index0 | times: 0.1 | plus: 0.7 }}s;
-      background: {{ project.bg }};
-    "
-  >
-    {% if project.img %}
-      <img alt="" {{ project.img }}>
-    {% else %}
-      <p style="height: 13em" />
-    {% endif %}
-    <div>
-      <h1>{{ project.name }}</h1>
-      <p>
-        {{ project.desc -}}
-        <span class="arrow" aria-hidden="true">→</span>
-      </p>
-    </div>
-  </div>
-
-  {% if project.url %}
-    </a>
-  {% endif %}
-{% endfor %}
+<div id="games">
+  {% for id in games %}
+    <iframe
+      class="steam-widget"
+      src="https://store.steampowered.com/widget/{{ id }}/"
+      title="Steam store widget"
+      loading="lazy"
+      style="animation-duration: {{ forloop.index0 | times: 0.1 | plus: 0.7 }}s;"
+    ></iframe>
+  {% endfor %}
+</div>

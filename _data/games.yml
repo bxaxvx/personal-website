@@ -1,0 +1,9 @@
+# Steam app IDs for the Games page.
+# Each entry generates a Steam store widget.
+# To add a game, just add its app ID (the number in the store URL,
+# e.g. https://store.steampowered.com/app/3109280/ -> 3109280).
+
+- 5039320
+- 892500
+- 3109280
+- 1318740
