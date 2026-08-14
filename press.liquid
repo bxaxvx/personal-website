@@ -24,6 +24,7 @@ layout: default
 
     .date {
       flex: none;
+      width: 8em;
       color: rgb(from var(--fg) r g b / 55%);
       font-variant-numeric: tabular-nums;
       white-space: nowrap;
@@ -31,6 +32,11 @@ layout: default
 
     .flag {
       flex: none;
+    }
+
+    > li > a {
+      min-width: 0;
+      white-space: normal;
     }
   }
 
