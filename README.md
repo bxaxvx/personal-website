@@ -13,10 +13,6 @@ the full source code of this modified version is published at
 <https://github.com/bxaxvx/personal-website> and linked from the
 site footer ("Website Source").
 
-> Note: the original blog posts / written content on kramo.page are
-> separately licensed under CC BY-SA 4.0. Replace that content with
-> your own rather than reusing it.
-
 ## Development
 
 ```bash
