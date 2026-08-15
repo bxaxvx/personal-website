@@ -37,10 +37,10 @@
     <header>
       <nav id="nav">
         <ul>
-          <li class="{% if home %}selected{% endif %}"><a class="dim" href="/">{% include 'kramo.svg' %}Home</a></li>
-          <li class="{% if press %}selected{% endif %}"><a class="dim" href="/press">Featured In</a></li>
-          <li class="{% if games %}selected{% endif %}"><a class="dim" href="/projects">Games</a></li>
-          <li class="{% if collaborate %}selected{% endif %}"><a class="dim" href="/collaborate">Collaborate</a></li>
+          <li class="{% if home %}selected{% endif %}"><a class="dim" href="/">{% include 'home.svg' %}Home</a></li>
+          <li class="{% if press %}selected{% endif %}"><a class="dim" href="/press">{% include 'featuredin.svg' %}Featured In</a></li>
+          <li class="{% if games %}selected{% endif %}"><a class="dim" href="/projects">{% include 'games.svg' %}Games</a></li>
+          <li class="{% if collaborate %}selected{% endif %}"><a class="dim" href="/collaborate">{% include 'collaborate.svg' %}Collaborate</a></li>
         </ul>
       </nav>
     </header>
