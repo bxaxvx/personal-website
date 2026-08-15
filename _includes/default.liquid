@@ -32,13 +32,15 @@
     {% assign post = tags contains "post" %}
     {% assign blog = post or page.url == "/blog" %}
     {% assign press = page.url == "/press" %}
-    {% assign games = home == false and blog == false and press == false %}
+    {% assign collaborate = page.url == "/collaborate" %}
+    {% assign games = home == false and blog == false and press == false and collaborate == false %}
     <header>
       <nav id="nav">
         <ul>
           <li class="{% if home %}selected{% endif %}"><a class="dim" href="/">{% include 'kramo.svg' %}Home</a></li>
           <li class="{% if press %}selected{% endif %}"><a class="dim" href="/press">Featured In</a></li>
           <li class="{% if games %}selected{% endif %}"><a class="dim" href="/projects">Games</a></li>
+          <li class="{% if collaborate %}selected{% endif %}"><a class="dim" href="/collaborate">Collaborate</a></li>
         </ul>
       </nav>
     </header>
