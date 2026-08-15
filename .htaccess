@@ -1,0 +1,45 @@
+# --- Serve clean (extensionless) URLs -------------------------------------
+# The site links to /press, /projects, /blog-post etc., but the built files
+# are press.html, projects.html, ... This makes Apache resolve them.
+
+Options -MultiViews
+RewriteEngine On
+
+# Serve index.html for directory requests (e.g. "/")
+DirectoryIndex index.html
+
+# Redirect /page.html -> /page (avoid duplicate URLs, keep canonical clean)
+RewriteCond %{THE_REQUEST} \s/([^\s?]+)\.html[\s?] [NC]
+RewriteRule ^ /%1 [R=301,L]
+
+# Internally serve /page from page.html
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME}\.html -f
+RewriteRule ^(.+?)/?$ $1.html [L]
+
+# --- Custom error page -----------------------------------------------------
+ErrorDocument 404 /404.html
+
+# --- Force HTTPS -----------------------------------------------------------
+# The edge (nginx) already redirects http -> https, and it terminates TLS, so
+# %{HTTPS} is "off" at Apache even for https requests. Keying the redirect on
+# %{HTTPS} would loop forever; only redirect when the proxy tells us it served
+# plain HTTP via X-Forwarded-Proto (never fires if the header is absent).
+RewriteCond %{HTTP:X-Forwarded-Proto} =http [NC]
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# --- Compression -----------------------------------------------------------
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/css text/xml application/xml application/rss+xml application/javascript image/svg+xml
+</IfModule>
+
+# --- Caching ---------------------------------------------------------------
+<IfModule mod_expires.c>
+  ExpiresActive On
+  ExpiresByType text/css "access plus 1 month"
+  ExpiresByType image/svg+xml "access plus 1 month"
+  ExpiresByType image/png "access plus 1 month"
+  ExpiresByType image/jpeg "access plus 1 month"
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType text/html "access plus 0 seconds"
+</IfModule>

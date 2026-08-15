@@ -10,7 +10,7 @@ export default function (eleventyConfig) {
   eleventyConfig.addFilter("rfc822", (date) => new Date(date).toUTCString());
 
   eleventyConfig.ignores.add("README.md");
-  ["fonts", "images", "videos", "style.css", ".well-known"].forEach((path) =>
+  ["fonts", "images", "videos", "style.css", ".well-known", ".htaccess"].forEach((path) =>
     eleventyConfig.addPassthroughCopy(path),
   );
 
@@ -37,10 +37,10 @@ export default function (eleventyConfig) {
     collection: { name: "post" },
     metadata: {
       language: "en",
-      title: "kramo's blog",
+      title: "Andrii Bychkovskyi — Blog",
       subtitle: "Reflections on how things work",
       base: "https://bychkovskyi.com/",
-      author: { name: "Laura Kramolis" },
+      author: { name: "Andrii Bychkovskyi" },
     },
   });
 }
