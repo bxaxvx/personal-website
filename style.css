@@ -237,7 +237,8 @@ nav {
         }
 
         > svg {
-          margin-bottom: -0.05em;
+          vertical-align: middle;
+          margin-top: -0.15em;
         }
       }
 

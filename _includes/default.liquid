@@ -9,7 +9,6 @@
 
     <title>{{ title }}</title>
     <link rel="icon" type="image/svg+xml" href="/images/favicon.svg">
-    <link rel="icon" type="image/png" href="/images/favicon.png">
     <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
     <link rel="stylesheet" type="text/css" href="/style.css?v=4.5">
 
@@ -22,7 +21,7 @@
     <meta property="og:url" content="https://bychkovskyi.com{{ page.url }}">
     <meta property="og:image" content="https://bychkovskyi.com/images/apple-touch-icon.png">
     <meta property="og:image:type" content="image/png">
-    <meta property="og:image:alt" content="A geometric fox logo">
+    <meta property="og:image:alt" content="Andrii Bychkovskyi monogram: white AB on an orange square">
 
     <!-- Mastodon verification -->
     <link rel="me" href="https://chaos.social/@kramo">
@@ -37,9 +36,9 @@
     <header>
       <nav id="nav">
         <ul>
-          <li class="{% if home %}selected{% endif %}"><a class="dim" href="/">{% include 'kramo.svg' %} Main</a></li>
+          <li class="{% if home %}selected{% endif %}"><a class="dim" href="/">{% include 'kramo.svg' %}Home</a></li>
+          <li class="{% if press %}selected{% endif %}"><a class="dim" href="/press">Featured In</a></li>
           <li class="{% if games %}selected{% endif %}"><a class="dim" href="/projects">Games</a></li>
-          <li class="{% if press %}selected{% endif %}"><a class="dim" href="/press">Press</a></li>
         </ul>
       </nav>
     </header>
