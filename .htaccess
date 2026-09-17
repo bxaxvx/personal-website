@@ -12,6 +12,13 @@ DirectoryIndex index.html
 RewriteCond %{THE_REQUEST} \s/([^\s?]+)\.html[\s?] [NC]
 RewriteRule ^ /%1 [R=301,L]
 
+# Game subsites live in folders (saturn94/index.html). Serve /saturn94 and
+# /saturn94/team directly instead of letting mod_dir redirect to a trailing
+# slash (that redirect would point at http://, since TLS ends at nginx).
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteCond %{REQUEST_FILENAME}/index.html -f
+RewriteRule ^(.+?)/?$ $1/index.html [L]
+
 # Internally serve /page from page.html
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME}\.html -f

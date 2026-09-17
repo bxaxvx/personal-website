@@ -216,6 +216,39 @@ nav {
   padding: 0.8em 0 0;
   justify-content: center;
 
+  /* Four tabs don't fit a phone: drop the icons, then tighten the padding. */
+  @media (width <= 30em) {
+    svg {
+      display: none;
+    }
+  }
+
+  @media (width <= 24em) {
+    ul {
+      font-size: 0.9em;
+    }
+
+    li {
+      padding: 0.4em 0.5em;
+    }
+
+    li.selected {
+      padding: 0.4em 0.7em;
+    }
+  }
+
+  /* Tabs move to a second row as whole pills rather than breaking a label
+     across lines. */
+  a {
+    white-space: nowrap;
+  }
+
+  ul {
+    flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
+  }
+
   ul {
     font-family: var(--medium);
     list-style: none;

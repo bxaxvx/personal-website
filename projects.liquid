@@ -5,42 +5,107 @@ layout: default
 ---
 <style>
   #games {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 1.5em;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 20em), 28.75em));
+    justify-content: center;
+    gap: 2em 1.5em;
+    max-width: 60em;
+    margin: 1em auto 0;
     padding: 0 1em;
+    list-style: none;
   }
 
-  .steam-widget {
-    width: 646px;
-    max-width: 100%;
-    aspect-ratio: 646 / 190;
-    border: 0;
-    border-radius: 4px;
-
-    /* The widget's document body is transparent, so the iframe's own canvas
-       shows through around the card. Inheriting `color-scheme: light dark`
-       from :root makes that canvas render as an opaque white backdrop, which
-       looks fine on the light theme but leaves a white halo in dark mode.
-       Resetting to `normal` lets the canvas track the OS scheme like everything
-       else, so it stays dark on the dark theme. */
-    color-scheme: normal;
+  .game {
+    /* Column, so the meta line sits at the bottom of every card in a row. */
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    text-align: left;
+    color: var(--fg);
+    font-family: var(--regular);
 
     @media (prefers-reduced-motion: no-preference) {
       animation: bounce-appear forwards;
     }
+
+    /* Key art is 460px wide on Steam, so cards stop there to stay sharp. */
+    img {
+      width: 100%;
+      max-width: none;
+      height: auto;
+      aspect-ratio: 460 / 215;
+      object-fit: cover;
+      border-radius: 12px;
+      transition: opacity 0.2s;
+    }
+
+    h2 {
+      margin: 0.7em 0 0.3em;
+      font-size: 1.2em;
+      transition-duration: 0.2s;
+    }
+
+    p {
+      margin: 0;
+      line-height: 1.5;
+      color: rgb(from var(--fg) r g b / 70%);
+    }
+
+    .meta {
+      display: block;
+      margin-top: auto;
+      padding-top: 0.5em;
+      font-family: var(--medium);
+      font-size: 0.9em;
+      color: rgb(from var(--fg) r g b / 50%);
+    }
+
+    /* These cards are links, so the global external-link marker would show up
+       on the ones pointing at Steam. The meta line says where they lead. */
+    &::after {
+      display: none;
+    }
+
+    &:hover {
+      @media (pointer: fine) {
+        color: var(--fg);
+
+        h2 {
+          color: var(--accent-bright);
+        }
+
+        img {
+          opacity: 0.85;
+        }
+      }
+    }
   }
 </style>
 
-<div id="games">
-  {% for id in games %}
-    <iframe
-      class="steam-widget"
-      src="https://store.steampowered.com/widget/{{ id }}/"
-      title="Steam store widget"
-      loading="lazy"
-      style="animation-duration: {{ forloop.index0 | times: 0.1 | plus: 0.7 }}s;"
-    ></iframe>
+<ul id="games">
+  {% for game in gameCards %}
+    <li>
+      <a class="game selectable" href="{{ game.url }}" style="animation-duration: {{ forloop.index0 | times: 0.1 | plus: 0.7 }}s;">
+        {% if game.header %}
+          <img src="{{ game.header }}" alt="{{ game.title }} key art" width="460" height="215" loading="lazy">
+        {% endif %}
+        <h2>{{ game.title }}</h2>
+        <p>{{ game.description | escape }}</p>
+        <span class="meta">
+          {%- comment -%}
+            Steam's date is free text: a year ("2027"), a full date, or a
+            phrase like "To be announced" that already reads as a sentence.
+          {%- endcomment -%}
+          {% assign vague = game.releaseDate | downcase %}
+          {% if game.comingSoon and vague != "to be announced" and vague != "coming soon" %}
+            Coming {{ game.releaseDate }} ·
+          {% else %}
+            {{ game.releaseDate }} ·
+          {% endif %}
+          {% if game.hasSite %}Game website{% else %}View on Steam{% endif %}
+          <span class="arrow">→</span>
+        </span>
+      </a>
+    </li>
   {% endfor %}
-</div>
+</ul>

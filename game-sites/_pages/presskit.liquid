@@ -1,0 +1,70 @@
+---
+layout: game
+pagination:
+  data: gameSitesWithPressKit
+  size: 1
+  alias: game
+permalink: "/{{ game.slug }}/press-kit/index.html"
+eleventyComputed:
+  title: "{{ game.title }} - Press Kit"
+  description: "Press kit and media information for {{ game.title }}"
+---
+<style>
+  #presskit {
+    max-width: 38em;
+    margin: auto;
+    padding: 0 1em;
+
+    > * {
+      @media (prefers-reduced-motion: no-preference) {
+        animation: bounce-appear;
+      }
+    }
+
+    p {
+      line-height: 1.6;
+      color: rgb(from var(--fg) r g b / 85%);
+    }
+
+    dl {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 0.5em 1.5em;
+      margin: 2em auto;
+      width: fit-content;
+      text-align: left;
+    }
+
+    dt {
+      color: rgb(from var(--fg) r g b / 55%);
+    }
+
+    dd {
+      margin: 0;
+    }
+  }
+</style>
+
+<section id="presskit" class="selectable">
+  <h1>Press Kit</h1>
+  <p>Making a video, stream or article about {{ game.title }}? Here's everything you need.</p>
+
+  {% if game.presskit.url %}
+    <p><a href="{{ game.presskit.url }}">Download the press kit</a></p>
+  {% endif %}
+
+  <dl>
+    <dt>Title</dt>
+    <dd>{{ game.title }}</dd>
+    {% if game.releaseDate %}
+      <dt>Release</dt>
+      <dd>{{ game.releaseDate }}</dd>
+    {% endif %}
+    <dt>Steam</dt>
+    <dd><a href="{{ game.steamUrl }}">{{ game.steamUrl | remove: "https://" }}</a></dd>
+    {% if game.presskit.email %}
+      <dt>Contact</dt>
+      <dd><a href="mailto:{{ game.presskit.email }}">{{ game.presskit.email }}</a></dd>
+    {% endif %}
+  </dl>
+</section>

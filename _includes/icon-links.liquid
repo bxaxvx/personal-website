@@ -1,0 +1,22 @@
+{%- comment -%}
+  Row of icon links. Expects `links`: [{name, url, color}]. The icon is
+  _includes/icons/<name>.svg, or a generic globe if there's no such file.
+{%- endcomment -%}
+{%- for link in links -%}
+  <a
+    class="dim"
+    href="{{ link.url }}"
+    title="{{ link.name }}"
+    style="
+      animation-duration: {{ forloop.index0 | times: 0.1 | plus: 0.5 }}s;
+      {% if link.color %}--accent-bright: #{{ link.color }};{% endif %}
+    "
+  >
+    {%- assign has_icon = link.name | hasIcon -%}
+    {%- if has_icon -%}
+      {% include 'icons/{{ link.name }}.svg' %}
+    {%- else -%}
+      {% include 'icons/Website.svg' %}
+    {%- endif -%}
+  </a>
+{%- endfor -%}

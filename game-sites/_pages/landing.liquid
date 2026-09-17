@@ -1,0 +1,182 @@
+---
+layout: game
+pagination:
+  data: gameSites
+  size: 1
+  alias: game
+permalink: "/{{ game.slug }}/index.html"
+lightbox: true
+eleventyComputed:
+  title: "{{ game.title }}"
+  description: "{{ game.description }}"
+---
+<style>
+  #game {
+    max-width: 50em;
+    margin: auto;
+    padding: 0 1em;
+
+    > * {
+      @media (prefers-reduced-motion: no-preference) {
+        animation: bounce-appear;
+      }
+    }
+  }
+
+  #game h1 {
+    font-size: 2.6em;
+    margin: 0.4em 0 0.6em;
+  }
+
+  #trailer {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    border: 0;
+    border-radius: 12px;
+    background: rgb(from var(--fg) r g b / 6%);
+  }
+
+  #about {
+    max-width: 38em;
+    margin: 1.5em auto;
+    line-height: 1.7;
+    color: rgb(from var(--fg) r g b / 85%);
+  }
+
+  #stores {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75em;
+    margin: 1.5em 0;
+
+    a {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5em;
+      padding: 0.7em 1.4em;
+      border-radius: 9999px;
+      border: 1px solid rgb(from var(--fg) r g b / 15%);
+      color: var(--fg);
+
+      svg {
+        width: 1.2em;
+        height: 1.2em;
+      }
+
+      /* Buttons don't need the global external-link marker. */
+      &::after {
+        display: none;
+      }
+
+      &:hover {
+        border-color: var(--accent-bright);
+        color: var(--accent-bright);
+      }
+    }
+
+    a:first-child {
+      background: var(--accent-bright);
+      border-color: var(--accent-bright);
+      color: white;
+
+      &:hover {
+        background: color-mix(in srgb, var(--accent-bright) 85%, black);
+        color: white;
+      }
+    }
+  }
+
+  #socials {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1em;
+    margin: 2em 0;
+  }
+
+  #screenshots {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(14em, 1fr));
+    gap: 0.75em;
+    margin-top: 2em;
+
+    img {
+      width: 100%;
+      max-width: none;
+      height: auto;
+      aspect-ratio: 16 / 9;
+      object-fit: cover;
+      border-radius: 8px;
+      transition: opacity 0.2s;
+    }
+
+    a:hover img {
+      opacity: 0.8;
+    }
+  }
+</style>
+
+<section id="game">
+  <h1 class="selectable">{{ game.title }}</h1>
+
+  {% if game.trailer %}
+    <iframe
+      id="trailer"
+      src="https://www.youtube-nocookie.com/embed/{{ game.trailer }}?rel=0"
+      title="{{ game.title }} trailer"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      referrerpolicy="strict-origin-when-cross-origin"
+      allowfullscreen
+    ></iframe>
+  {% endif %}
+
+  {% if game.description != "" %}
+    <p id="about" class="selectable">{{ game.description | escape }}</p>
+  {% endif %}
+
+  <div id="stores">
+    {% for store in game.stores %}
+      <a href="{{ store.url }}">
+        {%- assign has_icon = store.name | hasIcon -%}
+        {%- if has_icon %}{% include 'icons/{{ store.name }}.svg' %}{% endif -%}
+        {{ store.label }}
+      </a>
+    {% endfor %}
+  </div>
+
+  {% if game.socials.size > 0 %}
+    <div id="socials">
+      {% render 'icon-links', links: game.socials %}
+    </div>
+  {% endif %}
+
+  {% if game.screenshots.size > 0 %}
+    <div id="screenshots">
+      {% for shot in game.screenshots %}
+        <a class="shot" href="{{ shot.full }}" data-gallery="screenshots" data-type="image">
+          <img src="{{ shot.thumb }}" alt="{{ game.title }} screenshot {{ forloop.index }}" width="600" height="338" loading="lazy">
+        </a>
+      {% endfor %}
+    </div>
+  {% endif %}
+</section>
+
+{% if game.screenshots.size > 0 %}
+  <script src="/vendor/glightbox/glightbox.min.js" defer></script>
+  <script>
+    // Steam-style screenshot viewer: click to open, arrows/swipe to browse.
+    const still = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    window.addEventListener("load", () =>
+      GLightbox({
+        selector: ".shot",
+        loop: true,
+        zoomable: false,
+        openEffect: still ? "none" : "fade",
+        closeEffect: still ? "none" : "fade",
+        slideEffect: still ? "none" : "slide",
+      }),
+    );
+  </script>
+{% endif %}

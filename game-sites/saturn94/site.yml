@@ -1,0 +1,57 @@
+# https://bychkovskyi.com/saturn94 — see game-sites/README.md for all options.
+
+steam: 5039320
+
+# YouTube link or video ID.
+# trailer: https://www.youtube.com/watch?v=XXXXXXXXXXX
+trailer: https://www.youtube.com/watch?v=6o-1b93HdN0
+
+# Extra stores, shown after the automatic Steam button.
+# stores:
+#   - name: itch.io
+#     url: https://andriy-bychkovskyi.itch.io/saturn-94
+#     label: Buy on itch.io
+
+socials:
+  - name: Instagram
+    url: https://www.instagram.com/hrhrshvh/
+  - name: YouTube
+    url: https://www.youtube.com/@bychkovskyi
+  - name: x.com
+    url: https://x.com/bychk0vskyi
+
+press:
+    - date: 2026-08-18
+      lang: uk
+      title: "Анонс наративного симулятора космічної станції Saturn 94"
+      url: https://gamedev.dou.ua/forums/topic/61401/
+    - date: 2026-08-24
+      lang: uk
+      title: " Сало в космосі: атмосферна деталь чи шароварщина?"
+      url: https://gamedev.dou.ua/forums/topic/61548/
+
+
+
+# team:
+#   - name: Andrii Bychkovskyi
+#     role: Design, programming
+#     photo: andrii.jpg          # file in game-sites/saturn94/images/
+#     links:
+#       - name: x.com
+#         url: https://x.com/bychk0vskyi
+
+team:
+  - name: Andrii Bychkovskyi
+    role: Game design, Programming
+  - name: Vitalii Hryhorash
+    role: 3d graphics
+  - name: Oleksandr Peremot
+    role: Story
+  - name: Serhii Tronchuk
+    role: Sound design
+  - name: bobablin
+    role: 2d artist
+
+presskit:
+   url: https://drive.google.com/drive/folders/1mybqfv8OMTwCnoARf4i4Q7YYdREN4SfG
+   email: andriy@bychkovskyi.com

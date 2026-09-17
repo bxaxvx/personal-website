@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="description" content="{{ description | escape }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="canonical" href="https://bychkovskyi.com{{ page.url }}">
+
+    <title>{{ title }}</title>
+    <link rel="icon" type="image/svg+xml" href="/images/joystick.svg">
+    <link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+    <link rel="stylesheet" type="text/css" href="/style.css?v=4.7">
+
+    <!-- Open Graph metadata -->
+    <meta property="og:title" content="{{ title }}">
+    <meta property="og:description" content="{{ description | escape }}">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://bychkovskyi.com{{ page.url }}">
+    {% if game.header %}
+      <meta property="og:image" content="https://bychkovskyi.com{{ game.header }}">
+      <meta property="og:image:alt" content="{{ game.title }} key art">
+    {% endif %}
+    <meta name="twitter:card" content="summary_large_image">
+
+    {% if game.press.size > 0 %}<link rel="alternate" type="application/rss+xml" title="{{ game.title }} — Press" href="{{ game.url }}/press.xml">{% endif %}
+    {% if lightbox %}<link rel="stylesheet" type="text/css" href="/vendor/glightbox/glightbox.min.css">{% endif %}
+
+    <style>
+      /* Padding, not margin: body has a fixed height, and a bottom margin on
+         the last element is left out of the scrollable area on long pages. */
+      #back {
+        padding: 0 0 2em;
+      }
+    </style>
+  </head>
+  <body id="plain-body">
+    {% assign team_url = game.url | append: "/team" %}
+    {% assign press_url = game.url | append: "/press" %}
+    {% assign presskit_url = game.url | append: "/press-kit" %}
+    <header>
+      <nav id="nav">
+        <ul>
+          <li class="{% if page.url == game.url %}selected{% endif %}"><a class="dim" href="{{ game.url }}">{% include 'home.svg' %}Game</a></li>
+          {% if game.press.size > 0 %}
+            <li class="{% if page.url == press_url %}selected{% endif %}"><a class="dim" href="{{ press_url }}">{% include 'featuredin.svg' %}Featured In</a></li>
+          {% endif %}
+          {% if game.team.size > 0 %}
+            <li class="{% if page.url == team_url %}selected{% endif %}"><a class="dim" href="{{ team_url }}">{% include 'collaborate.svg' %}Team</a></li>
+          {% endif %}
+          {% if game.presskit %}
+            <li class="{% if page.url == presskit_url %}selected{% endif %}"><a class="dim" href="{{ presskit_url }}">{% include 'presskit.svg' %}Press Kit</a></li>
+          {% endif %}
+        </ul>
+      </nav>
+    </header>
+    <main id="content">
+      {{ content }}
+    </main>
+    <footer id="back">
+      <a class="dim" href="/">← bychkovskyi.com</a>
+    </footer>
+  </body>
+</html>

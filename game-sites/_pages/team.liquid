@@ -1,0 +1,83 @@
+---
+layout: game
+pagination:
+  data: gameSitesWithTeam
+  size: 1
+  alias: game
+permalink: "/{{ game.slug }}/team/index.html"
+eleventyComputed:
+  title: "{{ game.title }} - Team"
+  description: "The people behind {{ game.title }}"
+---
+<style>
+  #team {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2em 1.5em;
+    max-width: 50em;
+    margin: 1em auto 0;
+    padding: 0 1em;
+    list-style: none;
+
+    > li {
+      width: 13em;
+
+      @media (prefers-reduced-motion: no-preference) {
+        animation: bounce-appear;
+      }
+    }
+
+    img {
+      width: 8em;
+      height: 8em;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    h3 {
+      margin: 0.8em 0 0.2em;
+    }
+
+    .role {
+      margin: 0;
+      color: rgb(from var(--fg) r g b / 65%);
+      line-height: 1.5;
+    }
+
+    .links {
+      display: flex;
+      justify-content: center;
+      gap: 0.6em;
+      margin-top: 0.6em;
+
+      svg {
+        width: 1.2em;
+        height: 1.2em;
+      }
+    }
+  }
+</style>
+
+<h1>Team</h1>
+
+<ul id="team">
+  {% for member in game.team %}
+    <li class="selectable" style="animation-duration: {{ forloop.index0 | times: 0.1 | plus: 0.6 }}s;">
+      <img
+        src="{{ member.photo | default: '/images/avatar-placeholder.svg' }}"
+        alt="{% if member.photo %}{{ member.name }}{% endif %}"
+        width="160"
+        height="160"
+        loading="lazy"
+      >
+      <h3>{{ member.name }}</h3>
+      {% if member.role %}<p class="role">{{ member.role }}</p>{% endif %}
+      {% if member.links.size > 0 %}
+        <div class="links">
+          {% render 'icon-links', links: member.links %}
+        </div>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>

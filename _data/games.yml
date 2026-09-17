@@ -1,5 +1,7 @@
 # Steam app IDs for the Games page.
-# Each entry generates a Steam store widget.
+# Each entry generates a card built from the game's Steam store page.
+# If the ID also has a subsite in game-sites/, the card links there
+# instead of to Steam.
 # To add a game, just add its app ID (the number in the store URL,
 # e.g. https://store.steampowered.com/app/3109280/ -> 3109280).
 
