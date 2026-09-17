@@ -30,8 +30,17 @@ layout: default
       white-space: nowrap;
     }
 
+    /* SVG instead of emoji: Chromium on Windows/Linux has no flag emoji glyphs */
     .flag {
       flex: none;
+      display: inline-block;
+      width: 1.2em;
+      height: 0.8em;
+      margin: 0;
+      border-radius: 2px;
+      object-fit: cover;
+      position: relative;
+      top: 0.05em;
     }
 
     > li > a {
@@ -67,9 +76,9 @@ layout: default
     <li class="selectable" style="animation-duration: {{ forloop.index0 | times: 0.1 | plus: 0.7 }}s;">
       <span class="date">{{ article.date | date: "%b %-d, %Y" }}</span>
       {% if article.lang == "uk" %}
-        <span class="flag" role="img" aria-label="Ukrainian" title="Ukrainian">🇺🇦</span>
+        <img class="flag" src="/images/flags/ua.svg" alt="Ukrainian" title="Ukrainian">
       {% else %}
-        <span class="flag" role="img" aria-label="English" title="English">🇬🇧</span>
+        <img class="flag" src="/images/flags/gb.svg" alt="English" title="English">
       {% endif %}
       <a href="{{ article.url }}">{{ article.title }}</a>
       {% if article.url contains "youtube.com" %}
