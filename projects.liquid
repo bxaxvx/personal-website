@@ -28,8 +28,12 @@ layout: default
       animation: bounce-appear forwards;
     }
 
-    /* Key art is 460px wide on Steam, so cards stop there to stay sharp. */
+    /* Key art is 460px wide on Steam, so cards stop there to stay sharp.
+       `margin: 0` overrides the global `img { margin: auto }`, which would
+       otherwise soak up the spare height in a short card and push its art
+       down, leaving the row's images out of line. */
     img {
+      margin: 0;
       width: 100%;
       max-width: none;
       height: auto;
