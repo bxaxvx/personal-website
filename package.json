@@ -1,7 +1,9 @@
 {
   "scripts": {
     "build": "eleventy",
-    "serve": "eleventy --serve"
+    "serve": "eleventy --serve",
+    "press": "./site press",
+    "deploy": "./site deploy"
   },
   "dependencies": {
     "@11ty/eleventy-plugin-rss": "^2.0.4",

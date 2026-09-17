@@ -1,0 +1,25 @@
+{
+  "_comment": [
+    "Copy this file to deploy.config.json and fill in your server.",
+    "deploy.config.json is gitignored: this repository is public, so the",
+    "host and account name stay out of it.",
+    "",
+    "host         server to connect to",
+    "user         SSH account name",
+    "port         SSH port (22 unless your host says otherwise)",
+    "path         folder the site is served from, relative to the SSH home",
+    "             directory or absolute. Everything in it is mirrored from",
+    "             _site/, and anything in it that _site/ does not have is",
+    "             deleted, so point it at the site folder and nothing wider.",
+    "identityFile SSH key to use; null lets ssh pick the usual one",
+    "exclude      rsync patterns kept on the server and never deleted,",
+    "             e.g. [\"stats/\", \"*.log\"]"
+  ],
+
+  "host": "ЗАПОВНІТЬ: example.com",
+  "user": "ЗАПОВНІТЬ: ваш-логін",
+  "port": 22,
+  "path": "www",
+  "identityFile": null,
+  "exclude": []
+}

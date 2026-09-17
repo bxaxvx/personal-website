@@ -6,7 +6,9 @@
 // API. Every build asks Steam for the current data, so editing a store page
 // and rebuilding is enough to update the site. Responses and images are kept
 // in .cache/ as a fallback for when Steam is unreachable; STEAM_CACHE=1 skips
-// the network entirely and builds from that cache.
+// the network entirely and builds from that cache, and STEAM_STRICT=1 does the
+// opposite: it turns an unreachable Steam into a failed build instead of a
+// warning, so a deploy never ships a page quietly built from stale data.
 
 import fs from "node:fs";
 import path from "node:path";
@@ -57,7 +59,7 @@ async function fetchSteamApp(appId) {
     memo.set(appId, { data: entry.data, at: Date.now() });
     return entry.data;
   } catch (error) {
-    if (cached) {
+    if (cached && !process.env.STEAM_STRICT) {
       console.warn(`[game-sites] Steam app ${appId}: ${error.message}, using cached copy`);
       return JSON.parse(fs.readFileSync(cacheFile, "utf8"));
     }

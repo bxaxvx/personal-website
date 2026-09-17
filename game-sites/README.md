@@ -47,15 +47,22 @@ team:                          # optional, adds the Team page
         url: https://x.com/...
 
 press:                         # optional, adds the Featured In page
-  - date: 2026-06-25           #   (same list and RSS feed as the site-wide one)
-    lang: uk                   #   "uk" or "en"
+  - date: 2026-06-25           #   (its own list and RSS feed, separate from
+    lang: uk                   #    the site-wide one in _data/articles.yml)
     title: "Interview about the game"
-    url: https://...
+    url: https://...           #   lang: a code from _data/languages.yml
 
 presskit:                      # optional, adds the Press Kit page
   url: https://...             # press kit link
   email: press@example.com     # optional contact
 ```
+
+The `press:` list here and the site-wide one in `_data/articles.yml` are
+deliberately independent — a link can belong to the game, to the site, or to
+both. `mysite press <url>` asks which, and writes to each place you pick.
+A `lang:` that is not in `_data/languages.yml` shows as a text badge instead
+of a flag, so add the language there (and its flag SVG in `images/flags/`)
+before using a new code.
 
 Link `name`s pick an icon from `_includes/icons/` (`Discord`, `Steam`,
 `itch.io`, `x.com`, `YouTube`, `Instagram`, `Linkedin`, `GitHub`, `Mastodon`,

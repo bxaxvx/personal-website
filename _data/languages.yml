@@ -1,0 +1,18 @@
+# Languages available to the "lang:" field of press entries, both in
+# _data/articles.yml and in game-sites/<game>/site.yml.
+#
+# To add a language: put a flag SVG in images/flags/ and add a line here.
+#   flag: file name inside images/flags/
+#   name: used as the image's alt text and tooltip
+#
+# A "lang:" value missing from this list is rendered as a plain text badge
+# ("PL") instead of a flag, so a typo or a forgotten flag shows up on the page
+# rather than silently falling back to the wrong country.
+
+uk:
+  flag: ua.svg
+  name: Ukrainian
+
+en:
+  flag: gb.svg
+  name: English

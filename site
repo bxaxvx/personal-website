@@ -1,0 +1,112 @@
+#!/usr/bin/env node
+// Site CLI: add press mentions, preview locally, deploy.
+//
+//   press [url]   add a mention to the site-wide list and/or a game's
+//   dev           local preview with live reload
+//   build         build into _site/
+//   deploy        build and mirror _site/ to the server over SSH
+//
+// Run it as ./site from the repository, or through a symlink on PATH
+// (~/.local/bin/mysite) from anywhere. The commands live in _config/cli/.
+
+import path from "node:path";
+import process from "node:process";
+import { fileURLToPath } from "node:url";
+import { spawn } from "node:child_process";
+
+// Run from the repository root whatever directory it was called from, so the
+// relative paths the build and the data files use always resolve.
+const ROOT = path.dirname(fileURLToPath(import.meta.url));
+process.chdir(ROOT);
+
+// How this was invoked: "./site" when run from the repository, or the name of
+// the symlink (e.g. "mysite") when run from anywhere via PATH. Node keeps the
+// symlink in argv[1] even though import.meta.url resolves to the real file.
+const invokedAs = (() => {
+  const called = process.argv[1];
+  if (!called) return "./site";
+  const name = path.basename(called);
+  return path.dirname(path.resolve(called)) === ROOT ? `./${name}` : name;
+})();
+
+// So the commands can echo back the name the user actually types.
+process.env.SITE_CMD = invokedAs;
+
+const { bold, Cancelled, closePrompts, cyan, dim, red, yellow } = await import(
+  "./_config/cli/prompt.mjs"
+);
+
+function usage() {
+  console.log(`
+${bold("Використання")}: ${invokedAs} <команда>
+
+  ${cyan("press")} [url]     додати згадку в медіа
+                  ${dim("питає назву, дату, мову й куди додати; підставляє те,")}
+                  ${dim("що вдалося прочитати зі сторінки — все редагується")}
+
+  ${cyan("dev")}             локальний перегляд на http://localhost:8080
+  ${cyan("build")}           зібрати сайт у _site/
+
+  ${cyan("deploy")}          зібрати й залити на сервер
+                  ${dim("--dry-run")}   тільки показати, що змінилося
+                  ${dim("--no-build")}  залити наявний _site/ без перезбірки
+                  ${dim("--force")}     дозволити масове видалення на сервері
+`);
+}
+
+function eleventy(args, env = {}) {
+  return new Promise((resolve, reject) => {
+    const child = spawn("npx", ["@11ty/eleventy", ...args], {
+      stdio: "inherit",
+      env: { ...process.env, ...env },
+    });
+    child.on("error", reject);
+    child.on("close", (code) =>
+      code === 0 ? resolve() : reject(new Error(`eleventy завершився з кодом ${code}`)),
+    );
+  });
+}
+
+const [command, ...argv] = process.argv.slice(2);
+
+try {
+  switch (command) {
+    case "press": {
+      const { pressCommand } = await import("./_config/cli/press.mjs");
+      await pressCommand(argv);
+      break;
+    }
+    case "dev":
+    case "serve":
+      await eleventy(["--serve", ...argv]);
+      break;
+    case "build":
+      await eleventy(argv);
+      break;
+    case "deploy": {
+      const { deployCommand } = await import("./_config/cli/deploy.mjs");
+      await deployCommand(argv);
+      break;
+    }
+    case "help":
+    case "--help":
+    case "-h":
+    case undefined:
+      usage();
+      break;
+    default:
+      console.error(`${red("Невідома команда")}: ${command}`);
+      usage();
+      process.exitCode = 1;
+  }
+} catch (error) {
+  // A cancelled prompt means nothing was written; it is not a failure.
+  if (error instanceof Cancelled) {
+    console.log(`\n${yellow("Скасовано.")}`);
+  } else {
+    console.error(`\n${red("✗")} ${error.message}`);
+    process.exitCode = 1;
+  }
+} finally {
+  closePrompts();
+}

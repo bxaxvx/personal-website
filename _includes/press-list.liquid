@@ -1,0 +1,105 @@
+{% comment %}
+  The "Featured In" list, shared by the site-wide press page and by every game
+  subsite's press page. Parameters:
+    items — array of press entries ({ date, lang, title, url })
+    feed  — URL of the matching RSS feed, shown above the list
+  Flags come from _data/languages.yml; an unknown "lang" renders as a text
+  badge instead of silently falling back to a flag that says the wrong thing.
+{% endcomment %}
+<style>
+  #press {
+    list-style: none;
+    text-align: left;
+    max-width: 45em;
+    margin: auto;
+    padding: 0 1em;
+
+    > li {
+      display: flex;
+      align-items: baseline;
+      gap: 0.75em;
+      margin-bottom: 1.5em;
+
+      @media (prefers-reduced-motion: no-preference) {
+        animation: bounce-appear;
+      }
+    }
+
+    .date {
+      flex: none;
+      width: 8em;
+      color: rgb(from var(--fg) r g b / 55%);
+      font-variant-numeric: tabular-nums;
+      white-space: nowrap;
+    }
+
+    /* SVG instead of emoji: Chromium on Windows/Linux has no flag emoji glyphs */
+    .flag {
+      flex: none;
+      display: inline-block;
+      width: 1.2em;
+      height: 0.8em;
+      margin: 0;
+      border-radius: 2px;
+      object-fit: cover;
+      position: relative;
+      top: 0.05em;
+    }
+
+    /* Fallback for a language with no entry in _data/languages.yml */
+    .lang-code {
+      flex: none;
+      font-size: 0.7em;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 0.1em 0.35em;
+      border: 1px solid rgb(from var(--fg) r g b / 30%);
+      border-radius: 3px;
+      color: rgb(from var(--fg) r g b / 55%);
+    }
+
+    > li > a {
+      min-width: 0;
+      white-space: normal;
+    }
+
+    .youtube {
+      flex: none;
+      align-self: center;
+      display: inline-flex;
+      color: rgb(from var(--fg) r g b / 55%);
+    }
+
+    .youtube svg {
+      width: 1.1em;
+      height: 1.1em;
+    }
+  }
+
+  #subscribe {
+    margin: 0 0 2em;
+  }
+</style>
+
+<p id="subscribe">
+  <a class="dim" title="Subscribe via RSS" href="{{ feed }}">{% include 'rss.svg' %}</a>
+</p>
+
+<ul id="press">
+  {% assign sorted = items | sort: 'date' | reverse %}
+  {% for article in sorted %}
+    <li class="selectable" style="animation-duration: {{ forloop.index0 | times: 0.1 | plus: 0.7 }}s;">
+      <span class="date">{{ article.date | date: '%b %-d, %Y' }}</span>
+      {% assign language = languages[article.lang] %}
+      {% if language %}
+        <img class="flag" src="/images/flags/{{ language.flag }}" alt="{{ language.name }}" title="{{ language.name }}">
+      {% else %}
+        <span class="lang-code" title="{{ article.lang }}">{{ article.lang }}</span>
+      {% endif %}
+      <a href="{{ article.url }}">{{ article.title }}</a>
+      {% if article.url contains 'youtube.com' %}
+        <span class="youtube" role="img" aria-label="YouTube" title="YouTube">{% include 'icons/YouTube.svg' %}</span>
+      {% endif %}
+    </li>
+  {% endfor %}
+</ul>
