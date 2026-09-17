@@ -1,19 +1,28 @@
-# Materials that mention me, interviews, and articles.
+# Materials that mention me, interviews, and articles — the site-wide
+# "Featured In" page at /press and its RSS feed.
+#
+# The quickest way to add one is `mysite press <url>`: it reads the page and
+# offers a title, date and language for you to confirm or correct, then asks
+# whether the entry goes here, on a game's subsite, or both. Editing this file
+# by hand does exactly the same thing.
+#
+# This list and the per-game lists in game-sites/<game>/site.yml are kept
+# separate on purpose: a link may belong to one, the other, or both.
+#
 # Each entry:
 #   date:  publication date (YYYY-MM-DD)
-#   lang:  language of the material — "en" (English) or "uk" (Ukrainian)
+#   lang:  a language code from _data/languages.yml ("uk", "en", ...)
 #   title: title shown as a link
 #   url:   link to the material
 #
 # Order does not matter — the page sorts by date, newest first.
-# The entries below are examples; replace them with real ones.
 
 - date: 2023-01-16
   lang: uk
   title: "Як створити успішну інді-стратегію й чому видавець — це не завжди добре. Історія розробника гри Farlanders"
   url: https://gamedev.dou.ua/articles/farlanders-indie-game-story/
 
-- date: 2026-06-25
+- date: 2026-05-25
   lang: uk
   title: "Сам собі продюсер, художник і кодер: поради від українських інді-девелоперів, як самому створити гру та скільки це коштує"
   url: https://dev.ua/news/indie-gamedev-guide
@@ -43,4 +52,12 @@
   title: "Farlanders procedural map generation — my talk from GIC"
   url: https://www.youtube.com/watch?v=5JTHpkNdvYI
 
+- date: 2026-08-18
+  lang: uk
+  title: Анонс наративного симулятора космічної станції Saturn 94 
+  url: https://gamedev.dou.ua/forums/topic/61401/
 
+- date: 2026-09-16
+  lang: uk
+  title: "Маніфест видавця, або як жити із заробітку на своїх інді-іграх"
+  url: https://gamedev.dou.ua/blogs/game-publisher-manifesto/
