@@ -51,8 +51,14 @@ async function fetchSteamApp(appId) {
     const url = `https://store.steampowered.com/api/appdetails?appids=${appId}&l=english&cc=us`;
     const response = await fetch(url);
     if (!response.ok) throw new Error(`HTTP ${response.status}`);
-    const entry = (await response.json())[appId];
-    if (!entry?.success) throw new Error("Steam returned success: false");
+    // Steam sometimes keys the response by a different ID (e.g. one of the
+    // game's DLCs), so fall back to whichever entry describes this app.
+    const json = await response.json();
+    const entry =
+      json[appId] ??
+      Object.values(json).find((item) => String(item?.data?.steam_appid) === appId);
+    if (!entry) throw new Error(`no entry for this app in the response (keys: ${Object.keys(json).join(", ")})`);
+    if (!entry.success) throw new Error("Steam returned success: false");
 
     fs.mkdirSync(path.dirname(cacheFile), { recursive: true });
     fs.writeFileSync(cacheFile, JSON.stringify(entry.data));
