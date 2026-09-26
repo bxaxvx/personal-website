@@ -15,10 +15,14 @@ trailer: https://www.youtube.com/watch?v=6o-1b93HdN0
 socials:
   - name: Instagram
     url: https://www.instagram.com/hrhrshvh/
+  - name: TikTok
+    url: https://www.tiktok.com/@hrhrshvh
   - name: YouTube
     url: https://www.youtube.com/@bychkovskyi
   - name: x.com
     url: https://x.com/bychk0vskyi
+  - name: Discord
+    url: https://discord.com/invite/XAQPuBT2uq
 
 press:
     - date: 2026-08-18
@@ -29,6 +33,10 @@ press:
       lang: uk
       title: " Сало в космосі: атмосферна деталь чи шароварщина?"
       url: https://gamedev.dou.ua/forums/topic/61548/
+    - date: 2026-08-28
+      lang: en
+      title: "Three Ideas, One Game: How Saturn 94 Took Shape"
+      url: https://store.steampowered.com/news/app/5039320/view/707781454544765350
 
 
 

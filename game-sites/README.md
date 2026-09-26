@@ -65,6 +65,6 @@ of a flag, so add the language there (and its flag SVG in `images/flags/`)
 before using a new code.
 
 Link `name`s pick an icon from `_includes/icons/` (`Discord`, `Steam`,
-`itch.io`, `x.com`, `YouTube`, `Instagram`, `Linkedin`, `GitHub`, `Mastodon`,
-…). Unknown names get a generic globe icon. The hover color comes from the
+`itch.io`, `x.com`, `YouTube`, `Instagram`, `TikTok`, `Linkedin`, `GitHub`,
+`Mastodon`, …). Unknown names get a generic globe icon. The hover color comes from the
 link with the same name in `_data/links.yml`; set `color: ff0000` to override.
